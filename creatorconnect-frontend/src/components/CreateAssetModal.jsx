@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { uploadSingleMedia } from '../api/uploadApi';
 import { createAsset } from '../api/assetApi';
-import './CreateAssetModal.css';
+import styles from './CreateAssetModal.module.css';
 
 const CreateAssetModal = ({ isOpen, onClose, onAssetCreated }) => {
     const [assetData, setAssetData] = useState({
@@ -107,15 +107,15 @@ const CreateAssetModal = ({ isOpen, onClose, onAssetCreated }) => {
     console.log('Modal is rendering with isOpen=true');
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                <div className="modal-header">
+        <div className={styles["modal-overlay"]} onClick={onClose}>
+            <div className={styles["modal-content"]} onClick={(e) => e.stopPropagation()}>
+                <div className={styles["modal-header"]}>
                     <h2>Create New Asset</h2>
-                    <button className="modal-close" onClick={onClose}>✕</button>
+                    <button className={styles["modal-close"]} onClick={onClose}>✕</button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="asset-form">
-                    <div className="form-group">
+                <form onSubmit={handleSubmit} className={styles["asset-form"]}>
+                    <div className={styles["form-group"]}>
                         <label htmlFor="title">Asset Title *</label>
                         <input
                             type="text"
@@ -128,7 +128,7 @@ const CreateAssetModal = ({ isOpen, onClose, onAssetCreated }) => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className={styles["form-group"]}>
                         <label htmlFor="description">Description</label>
                         <textarea
                             id="description"
@@ -140,7 +140,7 @@ const CreateAssetModal = ({ isOpen, onClose, onAssetCreated }) => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className={styles["form-group"]}>
                         <label htmlFor="category">Category</label>
                         <select
                             id="category"
@@ -157,7 +157,7 @@ const CreateAssetModal = ({ isOpen, onClose, onAssetCreated }) => {
                         </select>
                     </div>
 
-                    <div className="form-group">
+                    <div className={styles["form-group"]}>
                         <label htmlFor="visibility">Visibility</label>
                         <select
                             id="visibility"
@@ -170,19 +170,19 @@ const CreateAssetModal = ({ isOpen, onClose, onAssetCreated }) => {
                         </select>
                     </div>
 
-                    <div className="form-group">
+                    <div className={styles["form-group"]}>
                         <label htmlFor="file">Upload Image or Video *</label>
-                        <div className="file-upload-area">
+                        <div className={styles["file-upload-area"]}>
                             {preview ? (
-                                <div className="preview">
+                                <div className={styles.preview}>
                                     {selectedFile.type.startsWith('image/') ? (
                                         <img src={preview} alt="Preview" />
                                     ) : (
-                                        <div className="video-preview">{preview}</div>
+                                        <div className={styles["video-preview"]}>{preview}</div>
                                     )}
                                 </div>
                             ) : (
-                                <div className="upload-placeholder">
+                                <div className={styles["upload-placeholder"]}>
                                     <span>📁</span>
                                     <p>Click to upload or drag and drop</p>
                                     <small>Images or Videos (up to 100MB)</small>
@@ -194,17 +194,17 @@ const CreateAssetModal = ({ isOpen, onClose, onAssetCreated }) => {
                                 onChange={handleFileSelect}
                                 accept="image/*,video/*"
                                 required
-                                className="file-input"
+                                className={styles["file-input"]}
                             />
                         </div>
                     </div>
 
-                    {error && <div className="error-message">{error}</div>}
+                    {error && <div className={styles["error-message"]}>{error}</div>}
 
-                    <div className="form-actions">
+                    <div className={styles["form-actions"]}>
                         <button
                             type="button"
-                            className="btn-cancel"
+                            className={styles["btn-cancel"]}
                             onClick={onClose}
                             disabled={isLoading}
                         >
@@ -212,7 +212,7 @@ const CreateAssetModal = ({ isOpen, onClose, onAssetCreated }) => {
                         </button>
                         <button
                             type="submit"
-                            className="btn-create"
+                            className={styles["btn-create"]}
                             disabled={isLoading}
                         >
                             {isLoading ? 'Uploading...' : 'Create Asset'}

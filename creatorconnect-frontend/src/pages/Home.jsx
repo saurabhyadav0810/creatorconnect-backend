@@ -1,20 +1,20 @@
 import { Link } from 'react-router-dom';
-import './Home.css';
+import styles from './Home.module.css';
 
 const Home = () => {
     return (
-        <div className="home-container">
-            <div className="hero-section">
-                <div className="hero-content">
-                    <h1 className="hero-title">Welcome to CreatorConnect</h1>
-                    <p className="hero-subtitle">
+        <div className={styles["home-container"]}>
+            <div className={styles["hero-section"]}>
+                <div className={styles["hero-content"]}>
+                    <h1 className={styles["hero-title"]}>Welcome to CreatorConnect</h1>
+                    <p className={styles["hero-subtitle"]}>
                         Connect with creators and discover amazing content
                     </p>
-                    <div className="hero-buttons">
-                        <Link to="/signup" className="btn btn-primary">
+                    <div className={styles["hero-buttons"]}>
+                        <Link to="/signup" className={`${styles.btn} ${styles["btn-primary"]}`}>
                             Get Started
                         </Link>
-                        <Link to="/login" className="btn btn-secondary">
+                        <Link to="/login" className={`${styles.btn} ${styles["btn-secondary"]}`}>
                             Login
                         </Link>
                     </div>
