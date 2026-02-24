@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginUser } from '../api/authApi';
 import { useAuth } from '../context/useAuth';
-import './Auth.css';
+import styles from './Auth.module.css';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -41,19 +41,19 @@ const Login = () => {
     };
 
     return (
-        <div className="auth-container">
-            <div className="auth-card">
-                <h2 className="auth-title">Welcome Back</h2>
-                <p className="auth-subtitle">Login to your account</p>
+        <div className={styles["auth-container"]}>
+            <div className={styles["auth-card"]}>
+                <h2 className={styles["auth-title"]}>Welcome Back</h2>
+                <p className={styles["auth-subtitle"]}>Login to your account</p>
                 
-                <form onSubmit={handleSubmit} className="auth-form">
+                <form onSubmit={handleSubmit} className={styles["auth-form"]}>
                     {error && (
-                        <div className="error-message">
+                        <div className={styles["error-message"]}>
                             {error}
                         </div>
                     )}
                     
-                    <div className="form-group">
+                    <div className={styles["form-group"]}>
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -66,7 +66,7 @@ const Login = () => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className={styles["form-group"]}>
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
@@ -81,14 +81,14 @@ const Login = () => {
 
                     <button 
                         type="submit" 
-                        className="auth-button"
+                        className={styles["auth-button"]}
                         disabled={loading}
                     >
                         {loading ? 'Logging in...' : 'Login'}
                     </button>
                 </form>
 
-                <p className="auth-footer">
+                <p className={styles["auth-footer"]}>
                     Don't have an account? <Link to="/signup">Sign up</Link>
                 </p>
             </div>

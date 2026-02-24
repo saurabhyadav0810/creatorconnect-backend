@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getPublicAssets } from '../api/assetApi';
-import './Dashboard.css';
+import styles from './Dashboard.module.css';
 
 const Dashboard = () => {
     const [publicAssets, setPublicAssets] = useState([]);
@@ -27,29 +27,29 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className="dashboard-container">
-            <div className="dashboard-content">
-                <div className="dashboard-section">
+        <div className={styles["dashboard-container"]}>
+            <div className={styles["dashboard-content"]}>
+                <div className={styles["dashboard-section"]}>
                     <h2>Explore Public Assets</h2>
                     {isLoading ? (
-                        <div className="empty-state">
+                        <div className={styles["empty-state"]}>
                             <h2>Loading assets...</h2>
                         </div>
                     ) : error ? (
-                        <div className="empty-state">
+                        <div className={styles["empty-state"]}>
                             <h2>Unable to load assets</h2>
                             <p>{error}</p>
                         </div>
                     ) : publicAssets.length > 0 ? (
-                        <div className="assets-grid">
+                        <div className={styles["assets-grid"]}>
                             {publicAssets.map((asset) => (
-                                <div key={asset._id} className="asset-card">
-                                    <div className="asset-image">
+                                <div key={asset._id} className={styles["asset-card"]}>
+                                    <div className={styles["asset-image"]}>
                                         <img src={asset.mediaUrl} alt={asset.title} />
                                     </div>
-                                    <div className="asset-info">
+                                    <div className={styles["asset-info"]}>
                                         <h3>{asset.title}</h3>
-                                        <p className="creator">by {asset.owner?.name || 'Unknown'}</p>
+                                        <p className={styles.creator}>by {asset.owner?.name || 'Unknown'}</p>
                                         {/* <div className="asset-footer">
                                             <span className="likes">❤️ {asset.likes}</span>
                                         </div> */}
@@ -58,7 +58,7 @@ const Dashboard = () => {
                             ))}
                         </div>
                     ) : (
-                        <div className="empty-state">
+                        <div className={styles["empty-state"]}>
                             <h2>No public assets yet</h2>
                             <p>Public uploads will appear here.</p>
                         </div>

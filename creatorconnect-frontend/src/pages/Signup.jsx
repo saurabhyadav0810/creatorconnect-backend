@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { initiateSignup, verifySignupOtp } from '../api/authApi';
 import { useAuth } from '../context/useAuth';
-import './Auth.css';
+import styles from './Auth.module.css';
 
 const Signup = () => {
     const [step, setStep] = useState(1); // 1: email, 2: OTP verification
@@ -81,22 +81,22 @@ const Signup = () => {
     };
 
     return (
-        <div className="auth-container">
-            <div className="auth-card">
-                <h2 className="auth-title">Create Account</h2>
-                <p className="auth-subtitle">
+        <div className={styles["auth-container"]}>
+            <div className={styles["auth-card"]}>
+                <h2 className={styles["auth-title"]}>Create Account</h2>
+                <p className={styles["auth-subtitle"]}>
                     {step === 1 ? 'Enter your email to get started' : 'Verify your email and complete signup'}
                 </p>
                 
                 {step === 1 ? (
-                    <form onSubmit={handleEmailSubmit} className="auth-form">
+                    <form onSubmit={handleEmailSubmit} className={styles["auth-form"]}>
                         {error && (
-                            <div className="error-message">
+                            <div className={styles["error-message"]}>
                                 {error}
                             </div>
                         )}
                         
-                        <div className="form-group">
+                        <div className={styles["form-group"]}>
                             <label htmlFor="email">Email</label>
                             <input
                                 type="email"
@@ -111,21 +111,21 @@ const Signup = () => {
 
                         <button 
                             type="submit" 
-                            className="auth-button"
+                            className={styles["auth-button"]}
                             disabled={loading}
                         >
                             {loading ? 'Sending OTP...' : 'Send OTP'}
                         </button>
                     </form>
                 ) : (
-                    <form onSubmit={handleVerifyOtp} className="auth-form">
+                    <form onSubmit={handleVerifyOtp} className={styles["auth-form"]}>
                         {error && (
-                            <div className="error-message">
+                            <div className={styles["error-message"]}>
                                 {error}
                             </div>
                         )}
                         
-                        <div className="form-group">
+                        <div className={styles["form-group"]}>
                             <label htmlFor="otp">OTP Code</label>
                             <input
                                 type="text"
@@ -140,7 +140,7 @@ const Signup = () => {
                             <small>Check your email for the OTP</small>
                         </div>
 
-                        <div className="form-group">
+                        <div className={styles["form-group"]}>
                             <label htmlFor="name">Full Name</label>
                             <input
                                 type="text"
@@ -153,7 +153,7 @@ const Signup = () => {
                             />
                         </div>
 
-                        <div className="form-group">
+                        <div className={styles["form-group"]}>
                             <label htmlFor="role">Role</label>
                             <select
                                 id="role"
@@ -167,7 +167,7 @@ const Signup = () => {
                             </select>
                         </div>
 
-                        <div className="form-group">
+                        <div className={styles["form-group"]}>
                             <label htmlFor="password">Password</label>
                             <input
                                 type="password"
@@ -181,7 +181,7 @@ const Signup = () => {
                             />
                         </div>
 
-                        <div className="form-group">
+                        <div className={styles["form-group"]}>
                             <label htmlFor="confirmPassword">Confirm Password</label>
                             <input
                                 type="password"
@@ -197,7 +197,7 @@ const Signup = () => {
 
                         <button 
                             type="submit" 
-                            className="auth-button"
+                            className={styles["auth-button"]}
                             disabled={loading}
                         >
                             {loading ? 'Verifying...' : 'Complete Signup'}
@@ -205,7 +205,7 @@ const Signup = () => {
 
                         <button 
                             type="button" 
-                            className="auth-button-secondary"
+                            className={styles["auth-button-secondary"]}
                             onClick={() => setStep(1)}
                         >
                             Back to Email
@@ -213,7 +213,7 @@ const Signup = () => {
                     </form>
                 )}
 
-                <p className="auth-footer">
+                <p className={styles["auth-footer"]}>
                     Already have an account? <Link to="/login">Login</Link>
                 </p>
             </div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import CreateAssetModal from '../components/CreateAssetModal';
 import { getMyAssets } from '../api/assetApi';
-import './MyAssets.css';
+import styles from './MyAssets.module.css';
 
 const MyAssets = () => {
     const [myAssets, setMyAssets] = useState([]);
@@ -42,33 +42,33 @@ const MyAssets = () => {
     };
 
     return (
-        <div className="my-assets-container">
-            <div className="my-assets-header">
+        <div className={styles["my-assets-container"]}>
+            <div className={styles["my-assets-header"]}>
                 <h1>My Assets</h1>
-                <button className="create-new-btn" onClick={handleCreateAsset}>+ Create New Asset</button>
+                <button className={styles["create-new-btn"]} onClick={handleCreateAsset}>+ Create New Asset</button>
             </div>
 
-            <div className="assets-content">
+            <div className={styles["assets-content"]}>
                 {isLoading ? (
-                    <div className="empty-state">
+                    <div className={styles["empty-state"]}>
                         <h2>Loading assets...</h2>
                     </div>
                 ) : error ? (
-                    <div className="empty-state">
+                    <div className={styles["empty-state"]}>
                         <h2>Unable to load assets</h2>
                         <p>{error}</p>
                     </div>
                 ) : myAssets.length > 0 ? (
-                    <div className="assets-grid">
+                    <div className={styles["assets-grid"]}>
                         {myAssets.map((asset) => (
-                            <div key={asset._id} className="asset-card">
-                                <div className="asset-image">
+                            <div key={asset._id} className={styles["asset-card"]}>
+                                <div className={styles["asset-image"]}>
                                     <img src={asset.mediaUrl} alt={asset.title} />
-                                    <span className={`status-badge ${asset.visibility}`}>
+                                    <span className={`${styles["status-badge"]} ${styles[asset.visibility]}`}>
                                         {asset.visibility === 'public' ? 'Public' : 'Private'}
                                     </span>
                                 </div>
-                                <div className="asset-info">
+                                <div className={styles["asset-info"]}>
                                     <h3>{asset.title}</h3>
                                     {/* <div className="asset-stats">
                                         <span>👁️ {asset.views}</span>
@@ -88,10 +88,10 @@ const MyAssets = () => {
                         ))}
                     </div>
                 ) : (
-                    <div className="empty-state">
+                    <div className={styles["empty-state"]}>
                         <h2>No assets yet</h2>
                         <p>Create your first asset to get started!</p>
-                        <button className="create-first-btn" onClick={handleCreateAsset}>+ Create Asset</button>
+                        <button className={styles["create-first-btn"]} onClick={handleCreateAsset}>+ Create Asset</button>
                     </div>
                 )}
             </div>
