@@ -15,6 +15,7 @@ export const saveOtp = async (email, otp) => {
         expiresAt
     });
 
+    await newOtp.save(); // FIXED: Save OTP to database
     console.log("Generated OTP:", otp);
 };
 export const verifyOtp = async (email, otp) => {
