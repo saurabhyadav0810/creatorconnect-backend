@@ -28,6 +28,7 @@ export const registerUser = async ({ name, email, password }) => {
 
 export const initiateSignupService = async (email) => {
   const otp = generateOtp();
+  console.log("[Signup] Generated OTP for", email, ":", otp);
   await OTP.deleteMany({ email });
 
   const expiresAt = new Date(Date.now() + 5 * 60 * 1000);
@@ -38,11 +39,13 @@ export const initiateSignupService = async (email) => {
   });
 
   await otpRecord.save();
+  console.log("[Signup] OTP saved successfully");
   await sendEmail(
     email,
     "Your OTP Code",
     `Your OTP is ${otp}. It expires in 5 minutes.`
   );
+  console.log("[Signup] OTP email sent to", email);
 
   return { email, expiresAt };
 };
@@ -54,13 +57,26 @@ export const verifySignupOtpService = async ({
   password,
   role
 }) => {
+  // Trim and clean the OTP input
+  const cleanOtp = String(otp).trim();
+  
+  console.log("[Verify] Verifying OTP for", email);
+  console.log("[Verify] User entered OTP:", cleanOtp);
+  console.log("[Verify] OTP type:", typeof cleanOtp, "| Length:", cleanOtp.length);
+  
   const record = await OTP.findOne({ email });
 
   if (!record) {
+    console.log("[Verify] ERROR: No OTP record found for", email);
     throw new Error("OTP not found");
   }
 
-  const isMatch = await bcrypt.compare(otp, record.otp);
+  console.log("[Verify] Found OTP record. Stored hashed OTP:", record.otp);
+  
+  // Compare hashed OTP (model uses bcrypt pre-save hook)
+  const isMatch = await bcrypt.compare(cleanOtp, record.otp);
+  console.log("[Verify] OTP comparison result:", isMatch);
+  
   if (!isMatch) {
     throw new Error("Invalid OTP");
   }
